@@ -19,14 +19,7 @@ def send_email():
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
 
-    print("EMAIL_USER:", sender)
-    print("EMAIL_PASS exists:", password is not None)
-    print("EMAIL_PASS length:", len(password) if password else 0)
-
     server.login(sender, password)
-
-
-
     server.send_message(msg)
 
     server.quit()
