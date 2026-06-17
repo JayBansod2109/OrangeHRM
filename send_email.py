@@ -2,30 +2,32 @@ import smtplib
 from email.mime.text import MIMEText
 import os
 
-sender = os.getenv("EMAIL_USER")
 
-password =os.getenv("EMAIL_PASS")
+def send_email():
 
-receiver = "jaybansod525@gmail.com"
+    sender = os.getenv("EMAIL_USER")
+    password = os.getenv("EMAIL_PASS")
 
-msg = MIMEText("Playwright Test Passed")
+    receiver = "jaybansod525@gmail.com"
 
-msg["Subject"] = "Daily Test Result"
+    msg = MIMEText("Playwright Test Passed")
 
-msg["From"] = sender
+    msg["Subject"] = "Daily Test Result"
+    msg["From"] = sender
+    msg["To"] = receiver
 
-msg["To"] = receiver
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
 
-server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.login(sender, password)
 
-server.starttls()
+    print("EMAIL_USER:", sender)
+    print("EMAIL_PASS exists:", password is not None)
 
-server.login(sender, password)
+    server.send_message(msg)
 
-print("Sender:", sender)
-print("Password exists:", password is not None)
-print("Password length:", len(password) if password else 0)
+    server.quit()
 
-server.send_message(msg)
 
-server.quit()
+if __name__ == "__main__":
+    send_email()
