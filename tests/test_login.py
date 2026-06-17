@@ -18,10 +18,10 @@ def test_login():
 
         page.locator("button[type='submit']").click()
 
-        page.wait_for_url("**/dashboard/**")
+        page.wait_for_url("**/dashboard/**",timeout=30000)
 
         dashboard_text = page.locator("h6")
 
-        assert dashboard_text.is_visible()
+        assert page.locator("h6").text_content() == "Dashboard"
 
         browser.close()
