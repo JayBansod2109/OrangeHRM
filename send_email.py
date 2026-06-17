@@ -6,7 +6,7 @@ sender = os.getenv("EMAIL_USER")
 
 password =os.getenv("EMAIL_PASS")
 
-receiver = "jaybasnod525@gmail.com"
+receiver = "jaybansod525@gmail.com"
 
 msg = MIMEText("Playwright Test Passed")
 
@@ -21,6 +21,10 @@ server = smtplib.SMTP("smtp.gmail.com", 587)
 server.starttls()
 
 server.login(sender, password)
+
+print("Sender:", sender)
+print("Password exists:", password is not None)
+print("Password length:", len(password) if password else 0)
 
 server.send_message(msg)
 
