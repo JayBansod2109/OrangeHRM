@@ -1,0 +1,27 @@
+from playwright.sync_api import sync_playwright
+
+def test_login():
+
+    with sync_playwright() as p:
+
+        browser = p.chromium.launch()
+
+        page = browser.new_page()
+
+        page.goto(
+            "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+        )
+
+        page.locator("input[name='username']").fill("Admin")
+
+        page.locator("input[name='password']").fill("admin123")
+
+        page.locator("button[type='submit']").click()
+
+        page.wait_for_url("**/dashboard/**")
+
+        dashboard_text = page.locator("h6")
+
+        assert dashboard_text.is_visible()
+
+        browser.close()
