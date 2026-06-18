@@ -10,5 +10,7 @@ def test_user():
     data =response.json()
     print(data)
 
-    assert data["id"] == 1
+    assert data[0]["id"] == 1
+    assert data[1]["userId"]== 1
+
 
