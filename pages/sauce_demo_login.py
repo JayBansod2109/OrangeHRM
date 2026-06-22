@@ -6,15 +6,20 @@ class LoginPage:
       def __init__(self , page:Page):
 
           self.page=page
-          self.username=page.get_by_role('textbox',name= "Username")
-          self.password=page.get_by_role('textbox',name="Password")
-          self.login_button.get_by_role("button",name="Login")
+          self.username_input = page.locator("[data-test=\"username\"]")
+          self.password_input = page.locator("[data-test=\"password\"]")
+          self.login_button = page.locator("[data-test=\"login-button\"]")
 
       def enter_username(self,username:str):
-          self.username_input.fill("Admin")
+          self.username_input.fill("standard_user")
 
       def enter_password(self,password:str):
-          self.password_input.fill("admin123")
+          self.password_input.fill("secret_sauce")
 
       def login_button (self):
           self.login_button.click()
+
+          # def login(self ,username:str,password:str):
+          #     self.username_input.fill(username)
+          #     self.password_input.fill(password)
+          #     self.login_button.click()
